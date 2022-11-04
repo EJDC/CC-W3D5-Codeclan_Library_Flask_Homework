@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Book List</h1>
+{% for book in books %}  
+<div>
+  <p>
+      Title:  {{ book.title }} <br>
+      Author: {{ book.author }} <br>
+      Genre:  {{ book.genre}} <br>
+      {% if book.checked_out %}
+      <span>&#128257;</span>
+      {% endif %}
+      <form action="/books/delete/{{ books.index(book) }}" method="post">
+        <input type="submit" value="Delete Book">
+      </form>
+  </p>
+</div>
+{% endfor %}
+<form action="/books" method="post">
+  <label for="title">Title</label>
+  <input type="text" name="title" id="title">
+  <label for="author">Author</label>
+  <input type="text" name="author" id="author">
+  <label for="genre">Genre</label>
+  <input type="text" name="genre" id="genre">
+  <label for="checked_out">Checked Out?</label>
+  <input type="checkbox" name="checked_out" id="checked_out">
+  <input type="submit" value="Add Event">
+</form>
+{% endblock %}
