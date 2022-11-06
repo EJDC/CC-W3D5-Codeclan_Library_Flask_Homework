@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h2>{{ book.title }} by {{book.author}}</h2>
+
+<div>Genre:&nbsp;&nbsp;{{ book.genre}}</div>
+<br>
+<article>{{ book.description}} </article>
+<div class="book-container">
+    <div class="book">
+      {% if book.checked_out %}
+      <aside class="aside book-checked-out2">&#9201;  Checked Out!</aside>
+      <aside class="aside book-checked-out-options2">
+        <form class="check-in" action="/books/check_in/{{ books.index(book) }}" method="post">
+          <input type="submit" value="Return Book">
+        </form>
+      </aside>
+      {% else %}
+      <aside class="aside book-checked-out2">&#9989;  Available</aside>
+      <aside class="aside book-checked-out-options2">
+        <form class="check-out" action="/books/check_out/{{ books.index(book) }}" method="post">
+        <input type="submit" value="Checkout Book"></form>
+      </aside>
+      {% endif %}
+      <footer class="book-footer2">
+      <form class="delete" action="/books/delete/{{ books.index(book) }}" method="post">
+      <input type="submit" value="Delete Book">
+      </form>
+      </footer>
+    </div>
+  </div>
+  <button class="back" onclick="history.back()">Go back to the library!</button>
+
+</div>
+
+{% endblock %}
